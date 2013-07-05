@@ -18,7 +18,6 @@
 
     $( "#about" ).on( "click", function( event ) {
        $("#main h2:first").text("About the Pipeline");
-       $("#sidebar").hide(0, function(){});
        $("#abouttext").show("fast", function(){});
        $("#queryform").hide(0, function(){});
     });
@@ -27,14 +26,10 @@
        $("#main h2:first").text("Search for an observation");
        $("#abouttext").hide(0, function(){});
        $("#queryform").show("fast", function(){});
-
-       // when a result is found from a query use the line below
-       $("#sidebar").show(100, function(){});
     });
 
     $( "#contact" ).on( "click", function( event ) {
        $("#main h2:first").text("If you have any issues or questions...");
-       $("#sidebar").hide(0, function(){});
        $("#queryform").hide(0, function(){});
        $("#abouttext").hide(0, function(){});
     });
@@ -92,15 +87,6 @@
 	  <button type="submit" class="btn">Submit</button>  
 	</form>  
 
-      </div>
-
-      <div id='sidebar' class='span3 sidebar' style="display: none;"> <!-- style="background-color: green"-->
-        <h2>Download</h2>
-	<ul class="nav nav-tabs nav-stacked">
-	  <li><a href='#'>PNG</a></li>
-	  <li><a href='#'>FITS</a></li>
-	  <li><a href='#'>PNG + FITS tarball</a></li>
-	</ul>
       </div>
 
     </div>

@@ -22,7 +22,7 @@ def deg2hms(ra='', dec='', doRound=False):
         decS = int((abs((dec-deg)*60)-decM)*60)
     else:
         decS = (abs((dec-deg)*60)-decM)*60
-    DEC = '{0}{1:02d}:{2:02d}:{3:02.1f}'.format(ds, deg, decM, decS)
+    DEC = '{0}{1:02d}d {2:02d}\' {3:02d}"'.format(ds, deg, decM, decS)
   
     if ra:
         if str(ra)[0] == '-':
@@ -33,7 +33,7 @@ def deg2hms(ra='', dec='', doRound=False):
             raS = int(((((ra/15)-raH)*60)-raM)*60)
         else:
             raS = ((((ra/15)-raH)*60)-raM)*60
-        RA = '{0}{1:02d}:{2:02d}:{3:02.1f}'.format(rs, raH, raM, raS)
+        RA = '{0}{1:02d}h {2:02d}m {3:02d}s'.format(rs, raH, raM, raS)
   
     if ra and dec:
         return (RA, DEC)
@@ -45,8 +45,8 @@ class CSV:
         if newcsv:
             csvfile =  open('spectral_products.csv', 'w')
             self.csvwriter = csv.writer(csvfile)
-            self.csvwriter.writerow(('target', 'projid', 'date', 'ra',
-                                     'dec', 'observer', 'fits', 'png'))
+            self.csvwriter.writerow(('Target', 'Project ID', 'Date', 'Right Ascension',
+                                     'Declination', 'Observer', 'FITS', 'PNG'))
         else:
             csvfile =  open('spectral_products.csv', 'a')
             self.csvwriter = csv.writer(csvfile)

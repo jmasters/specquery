@@ -16,7 +16,7 @@ if __name__ == '__main__':
     f.write("<thead>")
     f.write("<tr>")
     for field in fields:
-        f.write("<th>{0}</th>".format(field))
+        f.write("<th class=\"{0}_col\">{0}</th>".format(field))
     f.write("</tr>")
     f.write("</thead>")
 
@@ -25,10 +25,12 @@ if __name__ == '__main__':
     for line in csvreader:
         f.write("<tr>")
         for field in fields:
-            if field != 'fits' and field != 'png':
+            if field != 'FITS' and field != 'PNG':
                 val = line[field]
+            elif field=='PNG':
+                val = "<a href='static/{0}'>show</a>".format(line[field])
             else:
-                val = "<a href='static/{0}'>download</a>".format(line[field])
+                val = "<a href='static/{0}' download>download</a>".format(line[field])
             f.write("<td>{0}</td>".format(val))
         f.write("</tr>")
     f.write("</tbody>")

@@ -34,7 +34,7 @@ def deg2hms(ra='', dec='', doRound=False):
         else:
             raS = ((((ra/15)-raH)*60)-raM)*60
         RA = '{0}{1:02d}h {2:02d}m {3:02d}s'.format(rs, raH, raM, raS)
-  
+
     if ra and dec:
         return (RA, DEC)
     else:
@@ -44,23 +44,20 @@ class CSV:
     def __init__(self,newcsv=False):
         if newcsv:
             csvfile =  open('spectral_products.csv', 'w')
-            self.csvwriter = csv.writer(csvfile)
+            self.csvwriter = csv.writer(csvfile, quotechar='~')
             self.csvwriter.writerow(('Target', 'Project ID', 'Date', 'Right Ascension',
                                      'Declination', 'Observer', 'FITS', 'PNG'))
         else:
             csvfile =  open('spectral_products.csv', 'a')
-            self.csvwriter = csv.writer(csvfile)
+            self.csvwriter = csv.writer(csvfile, quotechar='~')
         
     def make_entry(self, fname):
         pngfile = os.path.splitext(fname)[0] + '.png'
 
-        # open the file and read the primary header
-        hdr = fitsio.read_header(fname, ext=0)
-        date = hdr['DATE']
-
         # open the file, 'SINGLE DISH' extension and read the value from
         # the first row of the table
         table = fitsio.read(fname, ext='SINGLE DISH')
+        date = table[0]['DATE-OBS'].strip().split('T')[0]
         observer = table[0]['OBSERVER'].strip()
         target = table[0]['OBJECT'].strip()
         projid = table[0]['PROJID'].strip()
@@ -71,7 +68,6 @@ class CSV:
         else:
             print 'ERROR: CTYPE2,CTYPE3 not RA,DEC, it\'s', coordtype1, coordtype2
             sys.exit()
-        
         self.csvwriter.writerow((target, projid, date, ra, dec, observer, fname, pngfile))
 
 if __name__ == '__main__':

@@ -3,13 +3,15 @@
  <title>
   GBT Spectral Product Query Tool
  </title>
- <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
- <link rel="stylesheet" type="text/css" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css" />
+ <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-2.3.2.min.css" />
+ <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-1.4.0.min.css" />
  <script src="assets/js/jquery-1.10.2.min.js">
  </script>
- <script class="jsbin" src="http://datatables.net/download/build/jquery.dataTables.nightly.js">
+ <script src="assets/js/jquery.dataTables.js">
  </script>
  <script src="assets/js/paging.js">
+ </script>
+ <script src="assets/js/bootstrap-modal.js">
  </script>
  <style type="text/css">
   p { 
@@ -62,6 +64,11 @@
    td {
    white-space: nowrap;
    }
+
+   .modal {
+   width: 820px;
+   left: 45%;
+  }
  </style>
  <script>
   $(document).ready(function() {  
@@ -95,8 +102,16 @@
        $("#abouttext").hide(0, function(){});
        $("#tablediv").show(0, function(){});
     });
-
+  
+    $( ".png-show" ).click( function( event ) {
+       // set the modal src attribute to be the value
+       // of the href for the clicked link
+       event.preventDefault();
+       $("#modal-img").attr("src", $(this).attr("href"));
+       $("#my-modal").modal("show");
     });
+
+    });  // end document ready
  </script>
 </head>
 <body>
@@ -125,6 +140,14 @@
    <div id="main" class="span12 main">
     <!-- style="background-color: yellow"-->
     <div id="tablediv">
+
+     <!-- modal -->
+     <div id="my-modal" class="modal hide fade">
+      <div class="modal-body">
+       <img id="modal-img" src="#" />
+      </div>
+     </div>
+
      <table>
      </table>
     </div>

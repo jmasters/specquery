@@ -28,7 +28,7 @@ if __name__ == '__main__':
             if field != 'FITS' and field != 'PNG':
                 val = line[field]
             elif field=='PNG':
-                val = "<a href='static/{0}'>show</a>".format(line[field])
+                val = "<a href='static/{0}' class='png-show'>show</a>".format(line[field])
             else:
                 val = "<a href='static/{0}' download>download</a>".format(line[field])
             f.write("<td>{0}</td>".format(val))

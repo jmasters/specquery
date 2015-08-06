@@ -25,12 +25,20 @@ if __name__ == '__main__':
     for line in csvreader:
         f.write("<tr>")
         for field in fields:
-            if field != 'FITS' and field != 'PNG':
+            if field != 'FITS' and field != 'IMG':
                 val = line[field]
-            elif field=='PNG':
-                val = "<a href='static/{0}' class='png-show'>show</a>".format(line[field])
+            elif field=='IMG':
+                if line[field]:
+                    val = "<a href='static/{0}' class='png-show'>show</a>".format(line[field].replace(' ','%20'))
+                else:
+                    val = ''
+            elif field=='FITS':
+                if line[field]:
+                    val = "<a href='static/{0}' download=''>download</a>".format(line[field].replace(' ','%20'))
+                else:
+                    val = ''
             else:
-                val = "<a href='static/{0}' download>download</a>".format(line[field])
+                print "'%s' not a recognized field.".format(field);
             f.write("<td>{0}</td>".format(val))
         f.write("</tr>")
     f.write("</tbody>")

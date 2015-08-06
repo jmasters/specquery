@@ -6,9 +6,6 @@ from BeautifulSoup import BeautifulSoup,Tag
 
 if __name__ == '__main__':
 
-    execfile('make_csv.py')
-    execfile('make_table.py')
-
     newsoup = BeautifulSoup(urllib.urlopen('newtable.html'))
     newtabl = newsoup.find('table')
 

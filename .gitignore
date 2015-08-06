@@ -1,6 +1,9 @@
 *.fits
 *.png
+*.gif
 *~
 #*#
 *.csv
 static/*.html
+*.pyc
+*.tgz
